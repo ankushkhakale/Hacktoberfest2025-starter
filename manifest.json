@@ -1,0 +1,38 @@
+{
+    "manifest_version": 3,
+    "name": "Fake News Detector",
+    "description": "Completely in-browser Fake News detection through neural networks.",
+    "version": "0.0.1",
+    "background": {
+        "service_worker": "entry/background.js"
+    },
+    "permissions": [
+        "activeTab",
+        "contextMenus",
+        "storage"
+    ],
+    "action": {
+        "default_icon": "assets/icons/logo.png",
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "assets/icons/logo-16x16.png",
+        "48": "assets/icons/logo-48x48.png",
+        "128": "assets/icons/logo-128x128.png"
+    },
+    "options_ui": {
+        "open_in_tab": false,
+        "page": "options.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": [ "entry/contentSelection.js", "entry/contentPage.js", "entry/contentTest.js"],
+            "css": ["assets/content.css"]
+        }
+    ],
+    
+    "content_security_policy": {
+        "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+    }
+}
